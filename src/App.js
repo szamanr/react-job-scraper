@@ -7,17 +7,15 @@ import JobDetails from "./JobDetails";
 function App() {
     return (
         <BrowserRouter>
-            <div className="App">
-                <main className="job-list">
-                    <Route exact path="/">
-                        <JobList/>
-                    </Route>
+            <main className="App">
+                <Route exact path="/">
+                    <JobList/>
+                </Route>
 
-                    <Route path="/job/:id">
-                        <JobDetails/>
-                    </Route>
-                </main>
-            </div>
+                <Route path="/job/:id">
+                    <JobDetails/>
+                </Route>
+            </main>
         </BrowserRouter>
     );
 }
