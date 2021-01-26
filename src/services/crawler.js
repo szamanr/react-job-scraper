@@ -7,15 +7,15 @@ import * as cheerio from "cheerio";
  * @param url
  * @param callback
  */
-export const fetchJobDetails = function(url, callback) {
-    request('https://cors-anywhere.herokuapp.com/' + url, function(error, response, body) {
-        if(error) {
+export const fetchJobDetails = function (url, callback) {
+    request('https://cors-anywhere.herokuapp.com/' + url, function (error, response, body) {
+        if (error) {
             console.error(error);
             callback({description: 'Unable to load the job description.'});
             return;
         }
 
-        if(response.statusCode === 200) {
+        if (response.statusCode === 200) {
             const $ = cheerio.load(body);
             let description = $("[class*=singlejob_introText]").html();
             description += $("[class*=singlejob_description]").html();
@@ -68,11 +68,11 @@ function detectJobType(body) {
     const seniorCount = (jobDetails.match(/(senior|lead|experienced)/g) || []).length;
     const juniorCount = (jobDetails.match(/(junior|intern\b|student|graduate)/g) || []).length;
 
-    if(seniorCount > juniorCount) {
+    if (seniorCount > juniorCount) {
         return 'professionals?';
     }
 
-    if(juniorCount > seniorCount) {
+    if (juniorCount > seniorCount) {
         return 'graduates?';
     }
 

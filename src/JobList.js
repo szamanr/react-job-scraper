@@ -78,7 +78,7 @@ function JobList() {
 
     return (
         <div className="JobList">
-            <p>jobs:</p>
+            <p>Spotify jobs in Stockholm:</p>
             <ul className="job-list">
                 {jobList}
             </ul>
