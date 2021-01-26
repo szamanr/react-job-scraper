@@ -18,3 +18,7 @@
 .job-type {
     font-weight: bold;
 }
+
+.job-experience {
+    font-style: italic;
+}

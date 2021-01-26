@@ -20,15 +20,29 @@ export const fetchJobDetails = function(url, callback) {
             let description = $("[class*=singlejob_introText]").html();
             description += $("[class*=singlejob_description]").html();
 
+            const experienceYears = detectExperienceYears(body);
             const jobType = detectJobType(body);
 
             callback({
-                description, jobType
+                description, jobType, experienceYears
             });
         } else {
             callback({description: 'Unable to load the job description.'});
         }
     });
+}
+
+/**
+ * tries to detect how many years of experience the job requires
+ *
+ * @param body
+ * @returns {RegExpMatchArray}
+ */
+function detectExperienceYears(body) {
+    const $ = cheerio.load(body);
+    const jobDetails = $("[class*=singlejob_rightContent]").text().toLowerCase();
+
+    return jobDetails.match(/\b[+\w]{1,20}(?= years)/);
 }
 
 /**

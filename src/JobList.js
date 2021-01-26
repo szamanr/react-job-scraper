@@ -10,6 +10,7 @@ function JobList() {
     let [selectedJob, expandJob] = useState(null);
     let [description, setDescription] = useState('');
     let [jobType, setJobType] = useState(null);
+    let [experience, setExperience] = useState(null);
 
     // fetch job list
     useEffect(() => {
@@ -32,8 +33,11 @@ function JobList() {
             if (result) {
                 setDescription(result.description);
 
-                const type = result.jobType ?? null;
+                const type = result.jobType ?? '';
                 setJobType(type);
+
+                const experience = result.experienceYears ?? '';
+                setExperience(experience);
             }
         });
 
@@ -52,6 +56,9 @@ function JobList() {
                 </p>
                 <p className="job-type">
                     {jobType}
+                </p>
+                <p className="job-experience">
+                    {experience} years of experience
                 </p>
                 <div className="job-description">
                     {ReactHtmlParser(description)}
