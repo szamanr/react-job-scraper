@@ -17,8 +17,7 @@ export const fetchJobDetails = function(url, callback) {
 
         if(response.statusCode === 200) {
             const $ = cheerio.load(body);
-            console.log($("[class*=singlejob_description]").text());
-            callback($("[class*=singlejob_introText]").text());
+            callback($("[class*=singlejob_description]").text());
         }
 
         callback('Unable to load the job description.');
