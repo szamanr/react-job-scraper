@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './JobList.css';
 import {fetchJobDetails} from "./services/crawler";
+import ReactHtmlParser from 'react-html-parser';
 
 function JobList() {
     const jobsListUrl = 'https://api-dot-new-spotifyjobs-com.nw.r.appspot.com/wp-json/animal/v1/job/search?l=stockholm';
@@ -45,9 +46,9 @@ function JobList() {
                 <p className="job-link">
                     <a href={jobUrl} target="_blank" rel="noreferrer">See job ad🔗</a>
                 </p>
-                <p className="job-description">
-                    {description}
-                </p>
+                <div className="job-description">
+                    {ReactHtmlParser(description)}
+                </div>
             </div>
         ) : null;
 
