@@ -8,7 +8,7 @@ import * as cheerio from "cheerio";
  * @param callback
  */
 export const fetchJobDetails = function(url, callback) {
-    request(url, function(error, response, body) {
+    request('https://cors-anywhere.herokuapp.com/' + url, function(error, response, body) {
         if(error) {
             console.error(error);
             callback('Unable to load the job description.');
@@ -18,8 +18,8 @@ export const fetchJobDetails = function(url, callback) {
         if(response.statusCode === 200) {
             const $ = cheerio.load(body);
             callback($("[class*=singlejob_description]").text());
+        } else {
+            callback('Unable to load the job description.');
         }
-
-        callback('Unable to load the job description.');
     });
 }
