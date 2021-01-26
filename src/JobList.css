@@ -14,3 +14,7 @@
 .job-title {
     cursor: pointer;
 }
+
+.job-type {
+    font-weight: bold;
+}

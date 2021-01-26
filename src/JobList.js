@@ -9,6 +9,7 @@ function JobList() {
     let [jobs, setJobs] = useState([]);
     let [selectedJob, expandJob] = useState(null);
     let [description, setDescription] = useState('');
+    let [jobType, setJobType] = useState(null);
 
     // fetch job list
     useEffect(() => {
@@ -29,7 +30,10 @@ function JobList() {
 
         fetchJobDetails(jobDetailsUrl + id, result => {
             if (result) {
-                setDescription(result);
+                setDescription(result.description);
+
+                const type = result.jobType ?? null;
+                setJobType(type);
             }
         });
 
@@ -45,6 +49,9 @@ function JobList() {
             <div className="job-details">
                 <p className="job-link">
                     <a href={jobUrl} target="_blank" rel="noreferrer">See job ad🔗</a>
+                </p>
+                <p className="job-type">
+                    {jobType}
                 </p>
                 <div className="job-description">
                     {ReactHtmlParser(description)}
