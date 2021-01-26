@@ -43,10 +43,24 @@ function detectJobType(body) {
 
     // try to check the job title first
     if (jobTitle.match(/(senior|lead)/g)) {
-        return 'senior';
+        return 'professionals';
     }
 
-    if (jobTitle.match(/(junior|intern)/g)) {
-        return 'junior';
+    if (jobTitle.match(/(junior|intern\b)/g)) {
+        return 'graduates';
     }
+
+    // otherwise check the description for mentions of keywords
+    const seniorCount = (jobDetails.match(/(senior|lead|experienced)/g) || []).length;
+    const juniorCount = (jobDetails.match(/(junior|intern\b|student|graduate)/g) || []).length;
+
+    if(seniorCount > juniorCount) {
+        return 'professionals?';
+    }
+
+    if(juniorCount > seniorCount) {
+        return 'graduates?';
+    }
+
+    return 'unknown';
 }
