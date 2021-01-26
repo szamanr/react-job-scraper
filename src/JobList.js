@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 function JobList() {
     const jobsListUrl = 'https://api-dot-new-spotifyjobs-com.nw.r.appspot.com/wp-json/animal/v1/job/search?l=stockholm';
-    const jobDetailsUrl = 'https://www.spotifyjobs.com/jobs/';
     let [jobs, setJobs] = useState([]);
 
     useEffect(() => {
@@ -14,11 +14,10 @@ function JobList() {
     }, []);
 
     const jobList = jobs.map(job => {
-
-        const jobUrl = jobDetailsUrl + job.id;
+        const jobUrl = '/job/' + job.id;
         return (
             <li key={job.id}>
-                <a href={jobUrl}>{job.text}</a>
+                <Link to={jobUrl}>{job.text}</Link>
             </li>
         );
     });
